@@ -1,0 +1,28 @@
+apply plugin: 'java'
+apply from: 'gradle/credentials.gradle'
+apply from: 'gradle/compile.gradle'
+apply from: 'gradle/publishing.gradle'
+apply from: 'gradle/bintray.gradle'
+apply from: 'gradle/artifactory.gradle'
+apply from: 'gradle/check.gradle'
+apply from: 'gradle/license.gradle'
+
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6'
+    classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:3.0.1'
+    classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+  }
+}
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile 'org.slf4j:slf4j-api:1.7.5'
+}
