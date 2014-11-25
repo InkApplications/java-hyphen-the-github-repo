@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  * try {
  *   throw new Exception("YOLO");
  * } catch (@Pokemon Exception e) {
- *   System.out.println("We got an error " + e.getMessage);
+ *   System.out.println("We caught them all!!! " + e.getMessage);
  * }
  * ```
  */
