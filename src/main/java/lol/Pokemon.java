@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2014 Ink Applications, LLC.
+ * Distributed under the MIT License (http://opensource.org/licenses/MIT)
+ */
 package lol;
 
 import java.lang.annotation.Documented;
@@ -21,6 +25,6 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  */
 @Documented
 @Retention(SOURCE)
-@Target({PARAMETER})
+@Target(PARAMETER)
 public @interface Pokemon {
 }

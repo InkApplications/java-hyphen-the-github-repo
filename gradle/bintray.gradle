@@ -10,9 +10,10 @@ bintray {
     publications = ['mavenJava']
     pkg {
         repo = attr 'project_bintray_repo'
+        userOrg =  attr 'project_bintray_org'
         name = attr 'name'
         desc = attr 'project_description'
-        licenses = ['Apache-2.0']
+        licenses = ['MIT']
         labels = [attr('project_labels').split(",")]
     }
 }

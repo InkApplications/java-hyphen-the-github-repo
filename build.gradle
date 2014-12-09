@@ -1,4 +1,6 @@
-apply plugin: 'java'
+import groovyx.net.http.ContentType
+import org._10ne.gradle.rest.RestTask
+
 apply from: 'gradle/credentials.gradle'
 apply from: 'gradle/compile.gradle'
 apply from: 'gradle/publishing.gradle'
@@ -15,8 +17,11 @@ buildscript {
     classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6'
     classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:3.0.1'
     classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+    classpath "org._10ne.gradle:rest-gradle-plugin:0.3.1"
   }
 }
+
+version = "$version${project.hasProperty('release') ? '' : '-SNAPSHOT'}"
 
 repositories {
   jcenter()
@@ -33,7 +38,21 @@ dependencies {
 
 javadoc.options {
   docletpath = configurations.markdownDoclet.files.asType(List)
-  // gradle should relly make this simpler
   doclet = "ch.raffael.doclets.pegdown.PegdownDoclet"
   addStringOption("parse-timeout", "10")
+}
+
+task bintraySign(type: RestTask) {
+  description = "Sign the release build on bintray"
+  httpMethod = 'post'
+  uri = "https://api.bintray.com/gpg/$project_vendor/$project_bintray_repo/${rootProject.name}/versions/$version"
+  username = bintrayUsername
+  password = bintrayKey
+  requestBody = [passphrase: signingPassword]
+  contentType = ContentType.JSON
+}
+
+task release {
+  description = "Releases a version of the library on Artifactory and Bintray"
+  dependsOn artifactoryPublish, bintrayUpload, bintraySign
 }
