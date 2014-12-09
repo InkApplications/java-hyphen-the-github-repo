@@ -1,6 +1,4 @@
-# Ink Applications Java Template
-
-This is a template for getting started on Java Projects with gradle.
+# Java: The Comedy Library
 
 ## Usage
 
