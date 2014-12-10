@@ -32,7 +32,6 @@ configurations {
 }
 
 dependencies {
-  compile 'org.slf4j:slf4j-api:1.7.5'
   markdownDoclet 'ch.raffael.pegdown-doclet:pegdown-doclet:1.1.1'
 }
 
@@ -42,13 +41,25 @@ javadoc.options {
   addStringOption("parse-timeout", "10")
 }
 
+apply plugin: "org.10ne.rest"
+
 task bintraySign(type: RestTask) {
-  description = "Sign the release build on bintray"
+  description = 'Sign the release build on bintray'
   httpMethod = 'post'
   uri = "https://api.bintray.com/gpg/$project_vendor/$project_bintray_repo/${rootProject.name}/versions/$version"
   username = bintrayUsername
   password = bintrayKey
   requestBody = [passphrase: signingPassword]
+  contentType = ContentType.JSON
+}
+
+task publishToMavenCentral(type: RestTask) {
+  description = 'Publish from bintray to maven central'
+  httpMethod = 'post'
+  uri = "https://api.bintray.com/maven_central_sync/$project_vendor/$project_bintray_repo/${rootProject.name}/versions/$version"
+  username = bintrayUsername
+  password = bintrayKey
+  requestBody = [username: sonatypeUserName, password: sonatypePassword, close: 1]
   contentType = ContentType.JSON
 }
 
