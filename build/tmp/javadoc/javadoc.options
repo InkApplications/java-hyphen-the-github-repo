@@ -1,6 +1,0 @@
--classpath '/home/areitz/Projects/gradle-java-template/build/classes/main:/home/areitz/Projects/gradle-java-template/build/resources/main:/home/areitz/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.5/6b262da268f8ad9eff941b25503a9198f0a0ac93/slf4j-api-1.7.5.jar'
--d '/home/areitz/Projects/gradle-java-template/build/docs/javadoc'
--doctitle 'gradle-java-template 1.0.0-SNAPSHOT API'
--quiet 
--windowtitle 'gradle-java-template 1.0.0-SNAPSHOT API'
-'/home/areitz/Projects/gradle-java-template/src/main/java/Library.java'
